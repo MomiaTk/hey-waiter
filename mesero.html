@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Mesero</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>👨‍🍳 Panel del Mesero</h1>
+
+        <div id="alerta">
+            Esperando solicitudes...
+        </div>
+
+        <div id="listaLlamadas"></div>
+    </div>
+
+    <audio id="sonido">
+        <source src="alerta.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="mesero.js" type="module"></script>
+
+    <script>
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker
+            .register("./service-worker.js")
+            .then(() => {
+
+                console.log(
+                    "Service Worker registrado"
+                );
+
+            })
+            .catch((error) => {
+
+                console.error(
+                    "Error registrando Service Worker:",
+                    error
+                );
+
+            });
+
+    });
+
+}
+</script>
+
+</body>
+</html>

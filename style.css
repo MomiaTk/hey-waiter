@@ -1,0 +1,83 @@
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+    text-align:center;
+    width:300px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+#btnMesero{
+    background:#ff9800;
+}
+
+#btnCuenta{
+    background:#4caf50;
+}
+
+#btnPedido{
+    background:#2196f3;
+}
+
+.mesa{
+    margin:20px 0;
+    font-size:20px;
+    font-weight:bold;
+}
+
+#alerta{
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+    background:#fff3cd;
+    font-size:22px;
+    font-weight:bold;
+}
+
+#listaLlamadas{
+    margin-top:20px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+button:hover{
+    transform: translateY(-2px);
+}
+
+button:active{
+    transform: scale(0.95);
+}
+.boton-usado{
+    opacity: 0.7;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(255,255,255,.7);
+}
