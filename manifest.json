@@ -1,7 +1,8 @@
 {
     "id": "/",
     "name": "HeyWaiter",
-    "short_name": "HeyWaiter",      "description": "Sistema inteligente de atención para restaurantes",
+    "short_name": "HeyWaiter",      
+    "description": "Sistema inteligente de atención para restaurantes",
     "start_url": "/mesero.html?negocio=demo_restaurante",
     "scope": "/",
     "display": "standalone",
@@ -15,13 +16,13 @@
                   ],
     "icons": [
               {
-                "src": "icon-192.png",
+                "src": "icon-512.png",
                 "sizes": "192x192",
                 "type": "image/png",
                 "purpose": "any maskable"
                 },
                {
-                 "src": "icon-512.png",
+                 "src": "icon-192.png",
                  "sizes": "512x512",
                  "type": "image/png",
                  "purpose": "any maskable"
