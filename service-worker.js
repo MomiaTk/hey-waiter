@@ -6,108 +6,107 @@ const APP_ASSETS = [
 
     "/",
 
-        "/mesero.html",
+    "/mesero.html",
 
-            "/style.css",
+    "/style.css",
 
-                "/mesero.js",
+    "/mesero.js",
 
-                    "/js/config.js",
+    "/js/config.js",
 
-                        "/icon-192.png",
+    "/icon-192.png",
 
-                            "/icon-512.png",
+    "/icon-512.png",
 
-                                "/manifest.json"
+    "/manifest.json"
 
-                                ];
-
-
-                                // ==========================
-                                // INSTALACIÓN
-                                // ==========================
-
-                                self.addEventListener("install", (event) => {
-
-                                    console.log("📦 Instalando HeyWaiter...");
-
-                                        event.waitUntil(
-
-                                                caches.open(CACHE_NAME)
-
-                                                            .then((cache) => {
-
-                                                                            return cache.addAll(APP_ASSETS);
-
-                                                                                        })
-
-                                                                                            );
-
-                                                                                                self.skipWaiting();
-
-                                                                                                });
+];
 
 
-                                                                                                // ==========================
-                                                                                                // ACTIVACIÓN
-                                                                                                // ==========================
+// ==========================
+// INSTALACIÓN
+// ==========================
 
-                                                                                                self.addEventListener("activate", (event) => {
+self.addEventListener("install", (event) => {
 
-                                                                                                    console.log("✅ HeyWaiter activado");
+    console.log("📦 Instalando HeyWaiter...");
 
-                                                                                                        event.waitUntil(
+    event.waitUntil(
 
-                                                                                                                caches.keys().then((keys) => {
+        caches.open(CACHE_NAME)
 
-                                                                                                                            return Promise.all(
+            .then((cache) => {
 
-                                                                                                                                            keys.map((key) => {
+                return cache.addAll(APP_ASSETS);
 
-                                                                                                                                                                if (key !== CACHE_NAME) {
+            })
 
-                                                                                                                                                                                        console.log("🗑 Eliminando", key);
+    );
 
-                                                                                                                                                                                                                return caches.delete(key);
+    self.skipWaiting();
 
-                                                                                                                                                                                                                                    }
-
-                                                                                                                                                                                                                                                    })
-
-                                                                                                                                                                                                                                                                );
-
-                                                                                                                                                                                                                                                                        })
-
-                                                                                                                                                                                                                                                                            );
-
-                                                                                                                                                                                                                                                                                self.clients.claim();
-
-                                                                                                                                                                                                                                                                                });
+});
 
 
-                                                                                                                                                                                                                                                                                // ==========================
-                                                                                                                                                                                                                                                                                // PETICIONES
-                                                                                                                                                                                                                                                                                // ==========================
+// ==========================
+// ACTIVACIÓN
+// ==========================
 
-                                                                                                                                                                                                                                                                                self.addEventListener("fetch", (event) => {
+self.addEventListener("activate", (event) => {
 
-                                                                                                                                                                                                                                                                                    event.respondWith(
+    console.log("✅ HeyWaiter activado");
 
-                                                                                                                                                                                                                                                                                            caches.match(event.request)
+    event.waitUntil(
 
-                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                            .then((response) => {
+        caches.keys().then((keys) => {
 
-                                                                                                                                                                                                                                                                                                                        if (response) {
+            return Promise.all(
 
-                                                                                                                                                                                                                                                                                                                                            return response;
+                keys.map((key) => {
 
-                                                                                                                                                                                                                                                                                                                                                            }
+                    if (key !== CACHE_NAME) {
 
-                                                                                                                                                                                                                                                                                                                                                                            return fetch(event.request);
+                        console.log("🗑 Eliminando", key);
 
-                                                                                                                                                                                                                                                                                                                                                                                        })
+                        return caches.delete(key);
 
-                                                                                                                                                                                                                                                                                                                                                                                            );
+                    }
 
-                                                                                                                                                                                                                                                                                                                                                                                            });
+                })
+
+            );
+
+        })
+
+    );
+
+    self.clients.claim();
+
+});
+
+
+// ==========================
+// PETICIONES
+// ==========================
+
+self.addEventListener("fetch", (event) => {
+
+    event.respondWith(
+
+        caches.match(event.request)
+
+            .then((response) => {
+
+                if (response) {
+
+                    return response;
+
+                }
+
+                return fetch(event.request);
+
+            })
+
+    );
+
+});
